@@ -4,12 +4,12 @@ from odoo import models, fields, api
 
 
 class FootballClub(models.Model):
-    """Extra fields for project.task model of project standard module. This model describes football club."""
-    _inherit = 'project.task'
+    """This model describes football club."""
+    _inherit = 'account.analytic.line'
 
     club_name = fields.Char(string="Club Name")
-    currency = fields.Many2one('res.currency', ondelete='set null', string="Currency")
-    annual_budget = fields.Monetary(currency_field="currency")
+    currency_id = fields.Many2one('res.currency', ondelete='set null', string="Currency")
+    annual_budget = fields.Monetary(currency_field="currency_id")
     players_count = fields.Integer(string="Number of players")
     region = fields.Selection(
         selection=[
@@ -22,20 +22,20 @@ class FootballClub(models.Model):
     year_created = fields.Date("Club created")
     description = fields.Text(string="Club description")
     is_active = fields.Boolean(string="Club is active?")
-    project_name = fields.One2many("project.project", "task_item", string="Project (O2m)")
+    project_name_id = fields.One2many("project.project", "task_item_id", string="Project (O2m)")
 
 
 class FootballPlayer(models.Model):
-    """Extra fields for project.task model of Project standard module. This model describes football club captain."""
-    _inherit = 'project.task'
+    """This model describes football club captain."""
+    _inherit = 'account.analytic.line'
 
     player_name = fields.Char(string="Captain Name")
-    club = fields.Many2one("res.partner", ondelete='set null', string="Captain previous club")
+    club_id = fields.Many2one("res.partner", ondelete='set null', string="Captain previous club")
 
 
 class ProjectInherited(models.Model):
-    """model to test One2many inheritance field"""
+    """Model to test One2many inheritance field"""
     _inherit = "project.project"
 
-    task_item = fields.Many2one("project.task", ondelete='set null', string="Needed for O2M testing")
+    task_item_id = fields.Many2one("account.analytic.line", ondelete='set null', string="Needed for O2M testing")
 
