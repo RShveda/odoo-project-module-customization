@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+
+    <record id="football_task" model="ir.ui.view">
+        <field name="name">football.club.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+          <field name="user_id" position="after">
+            <field name="club_name" required="1"></field>
+            <field name="region"></field>
+            <field name="players_count" required="1"></field>
+            <field name="year_created"></field>
+            <field name="annual_budget"></field>
+            <field name="description" placeholder="some info about club"></field>
+            <field name="is_active" readonly="1"></field>
+            <field name="player_name"></field>
+            <field name="club"></field>
+            <field name="project_name"></field>
+          </field>
+        </field>
+    </record>
+
+  </data>
+</odoo>
