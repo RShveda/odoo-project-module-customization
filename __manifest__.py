@@ -19,11 +19,12 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'project', 'account'],
+    'depends': ['base', 'project', 'account', 'hr_employee_time_clock', 'hr_timesheet'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
+        'security/football_security.xml',
         'views/views.xml',
         'views/templates.xml',
     ],

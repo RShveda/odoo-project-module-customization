@@ -1,32 +1,50 @@
 <odoo>
-  <data>
+    <data>
 
-    <record id="football_task" model="ir.ui.view">
-        <field name="name">any</field>
-        <field name="model">account.analytic.line</field>
-        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form"/>
-        <field name="arch" type="xml">
-          <xpath expr="//sheet" position="inside">
-            <separator string="New data:" colspan="4"/>
-            <group>
-              <group>
-                  <field name="club_name" required="1"></field>
-                  <field name="region"></field>
-                  <field name="players_count" required="0"></field>
-                  <field name="year_created"></field>
-                  <field name="annual_budget"></field>
-                  <field name="description" placeholder="some info about club"></field>
-                  <field name="is_active" readonly="1"></field>
-              </group>
-              <group>
-                  <field name="player_name"></field>
-                  <field name="club_id" domain="[('name', '=', 'Azure Interior')]"></field>
-                  <field name="project_name_id"></field>
-              </group>
-            </group>
-          </xpath>
-        </field>
-    </record>
+        <record id="football_task_1" model="ir.ui.view">
+            <field name="name">any_1</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_employee_time_clock.hr_timesheet_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <separator string="New data:" colspan="4"/>
+                    <group>
+                        <group>
+                            <field name="club_name" required="1"></field>
+                            <field name="region"></field>
+                            <field name="players_count" required="0"></field>
+                            <field name="year_created" groups="project_football.access_project_football_project_football"></field>
+                            <field name="annual_budget"></field>
+                            <field name="description" placeholder="some info about club"></field>
+                            <field name="is_active" readonly="1"></field>
+                        </group>
+                        <group>
+                            <field name="player_name"></field>
+                            <field name="club_id" domain="[('name', '=', 'Azure Interior')]"></field>
+                            <field name="project_name_id"></field>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
 
-  </data>
+        <record id="hr_timesheet_line_search_mod" model="ir.ui.view">
+            <field name="name">any_2</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="long" string="Long Duration" domain="[('unit_amount', '>', 1)]"/>
+                </xpath>
+                <xpath expr="//group" position="inside">
+                    <filter string="Duration" name="groupby_duration" domain="[]" context="{'group_by': 'unit_amount'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_timesheet.act_hr_timesheet_line_view_kanban" model="ir.actions.act_window.view">
+            <field name="sequence">3</field>
+        </record>
+
+    </data>
 </odoo>
