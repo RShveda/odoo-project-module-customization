@@ -1,0 +1,128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* project_football
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-11 17:38+0000\n"
+"PO-Revision-Date: 2020-12-12 13:45+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Language: uk_UA\n"
+
+#. module: project_football
+#: model:ir.model,name:project_football.model_account_analytic_line
+msgid "AccountAnalyticLine"
+msgstr "АналітичнаЛініяРахунку"
+
+#. module: project_football
+#: model:ir.model.fields.selection,name:project_football.selection__account_analytic_line__region__africa
+msgid "Africa"
+msgstr "Африка"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__annual_budget
+msgid "Annual Budget"
+msgstr "Річний Бюджет"
+
+#. module: project_football
+#: model:ir.model.fields.selection,name:project_football.selection__account_analytic_line__region__asia
+msgid "Asia"
+msgstr "Азія"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__player_name
+msgid "Captain Name"
+msgstr "Імя Капітана"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__club_id
+msgid "Captain previous club"
+msgstr "Попередній Клуб Капітана"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__club_name
+msgid "Club Name"
+msgstr "Імя Клубу"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__year_created
+msgid "Club created"
+msgstr "Дата заснування"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__description
+msgid "Club description"
+msgstr "Опис клубу"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__is_active
+msgid "Club is active?"
+msgstr "Клуб активний?"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__currency_id
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: project_football
+#: model_terms:ir.ui.view,arch_db:project_football.hr_timesheet_line_search_mod
+msgid "Duration"
+msgstr "Час"
+
+#. module: project_football
+#: model:ir.model.fields.selection,name:project_football.selection__account_analytic_line__region__europe
+msgid "Europe"
+msgstr "Європа"
+
+#. module: project_football
+#: model:res.groups,name:project_football.football_manager
+msgid "Footballer"
+msgstr "Футболіст"
+
+#. module: project_football
+#: model_terms:ir.ui.view,arch_db:project_football.hr_timesheet_line_search_mod
+msgid "Long Duration"
+msgstr "Час"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_project_project__task_item_id
+msgid "Needed for O2M testing"
+msgstr "Потрібно для о2м тесту"
+
+#. module: project_football
+#: model_terms:ir.ui.view,arch_db:project_football.football_task_1
+msgid "New data:"
+msgstr "Нові дані:"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__players_count
+msgid "Number of players"
+msgstr "Кількість гравців"
+
+#. module: project_football
+#: model:ir.model,name:project_football.model_project_project
+msgid "Project"
+msgstr "Проєкт"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__project_name_id
+msgid "Project (O2m)"
+msgstr "Проєкт(О2М)"
+
+#. module: project_football
+#: model:ir.model.fields,field_description:project_football.field_account_analytic_line__region
+msgid "Region"
+msgstr "Регіон"
+
+#. module: project_football
+#: model_terms:ir.ui.view,arch_db:project_football.football_task_1
+msgid "some info about club"
+msgstr "інформація про клуб"
