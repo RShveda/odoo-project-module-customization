@@ -24,22 +24,24 @@ class FootballClub(models.Model):
     )
     year_created = fields.Date("Club created", default='2000-01-01')
     description = fields.Text(string="Club description", default="Lorem ipsum")
-    is_active = fields.Boolean(string="Club is active?", compute="_check_if_active")
+    is_active = fields.Boolean(string="Club is active?", compute="_compute_if_active")
     project_name_id = fields.One2many("project.project", "task_item_id", string="Project (O2m)", default=None)
 
-    def _check_if_active(self):
-        self.is_active = True
+    def _compute_if_active(self):
+        for record in self:
+            record.is_active = True
 
 
 class FootballPlayer(models.Model):
     """This model describes football club captain."""
     _inherit = 'account.analytic.line'
 
-    player_name = fields.Char(string="Captain Name", compute="_get_footballer_name")
+    player_name = fields.Char(string="Captain Name", compute="_compute_footballer_name")
     club_id = fields.Many2one("res.partner", ondelete='set null', string="Captain previous club", default=2)
 
-    def _get_footballer_name(self):
-        self.player_name = choice(["Ronaldo", "Shevchenko", "Pele"])
+    def _compute_footballer_name(self):
+        for record in self:
+            record.player_name = choice(["Ronaldo", "Shevchenko", "Pele"])
 
 
 class ProjectInherited(models.Model):
