@@ -12,17 +12,20 @@
                         <group>
                             <field name="club_name" required="1"></field>
                             <field name="region"></field>
+                            <field name="country"></field>
                             <field name="players_count" required="0"></field>
                             <field name="year_created" groups="project_football.football_manager"></field>
                             <field name="currency_id" readonly="1"></field>
                             <field name="annual_budget"></field>
                             <field name="description" placeholder="some info about club"></field>
                             <field name="is_active"></field>
+                            <field name="copied_from"></field>
                         </group>
                         <group>
                             <field name="player_name"></field>
-                            <field name="club_id" domain="[('name', '=', 'Azure Interior')]"></field>
+                            <field name="club_id" domain="[('name', '!=', 'Azure Interior')]"></field>
                             <field name="project_name_id"></field>
+                            <field name="project_created"></field>
                         </group>
                     </group>
                 </xpath>
