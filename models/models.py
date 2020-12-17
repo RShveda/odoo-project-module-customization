@@ -115,8 +115,34 @@ class FootballPlayer(models.Model):
     """This model describes football club captain."""
     _inherit = 'account.analytic.line'
 
+    selection_options = [
+            ("new", "New"),
+        ]
     player_name = fields.Char(string="Captain Name", compute="_compute_footballer_name")
     club_id = fields.Many2one("res.partner", ondelete='set null', string="Captain previous club", default=2)
+    parent_field = fields.Selection(
+        selection=[
+            ("1", "1"),
+            ("2", "2"),
+            ("3", "3"),
+        ],
+        string="Parent"
+    )
+    child_field = fields.Selection(
+        selection=selection_options,
+        string="Child"
+    )
+
+    @api.onchange("parent_field")
+    def _onchange_parent(self):
+        print("parent change")
+        print(self.selection_options)
+        print(self.__dict__)
+        FootballPlayer.selection_options = [
+            ("new1", "New1"),
+        ]
+        print(self.selection_options)
+        print(self.__dict__)
 
     @api.depends("club_id")
     def _compute_footballer_name(self):
