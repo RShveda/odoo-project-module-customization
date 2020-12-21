@@ -24,10 +24,8 @@
                         <group>
                             <field name="player_name"></field>
                             <field name="club_id" domain="[('name', '!=', 'Azure Interior')]"></field>
-                            <field name="project_name_id"></field>
+                            <field name="project_name_id" context="{'default_name': 'new name'}"></field>
                             <field name="project_created"></field>
-                            <field name="parent_field"></field>
-                            <field name="child_field"></field>
                         </group>
                     </group>
                 </xpath>

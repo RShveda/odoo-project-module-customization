@@ -2,7 +2,6 @@
 
 from odoo import models, fields, api
 from random import randint, choice
-
 from odoo.exceptions import ValidationError
 
 
@@ -39,7 +38,7 @@ class FootballClub(models.Model):
     description = fields.Text(string="Club description", default="Lorem ipsum")
     is_active = fields.Boolean(string="Club is active?", compute="_compute_if_active")
     project_name_id = fields.One2many("project.project", "task_item_id", string="Project (O2m)",
-                                      default=lambda x: x.env["project.project"].browse([2]))
+                                      default=lambda x: x.env["project.project"].browse([2]), context={"Active": True})
     project_created = fields.Char(compute="_compute_project_date")
     copied_from = fields.Char(string="Copied From", readonly=True)
 
@@ -66,8 +65,8 @@ class FootballClub(models.Model):
         """
         Logs to console that record was delete.
         """
+        super(FootballClub, self).unlink()
         print("the record been deleted")
-        task_sheet = super(FootballClub, self).unlink()
 
     def write(self, vals):
         """
@@ -116,38 +115,23 @@ class FootballPlayer(models.Model):
     _inherit = 'account.analytic.line'
 
     selection_options = [
-            ("new", "New"),
-        ]
+        ("new", "New"),
+        ("new1", "New1"),
+    ]
     player_name = fields.Char(string="Captain Name", compute="_compute_footballer_name")
     club_id = fields.Many2one("res.partner", ondelete='set null', string="Captain previous club", default=2)
-    parent_field = fields.Selection(
-        selection=[
-            ("1", "1"),
-            ("2", "2"),
-            ("3", "3"),
-        ],
-        string="Parent"
-    )
-    child_field = fields.Selection(
-        selection=selection_options,
-        string="Child"
-    )
-
-    @api.onchange("parent_field")
-    def _onchange_parent(self):
-        print("parent change")
-        print(self.selection_options)
-        print(self.__dict__)
-        FootballPlayer.selection_options = [
-            ("new1", "New1"),
-        ]
-        print(self.selection_options)
-        print(self.__dict__)
 
     @api.depends("club_id")
     def _compute_footballer_name(self):
         for record in self:
-            record.player_name = choice(["Ronaldo", "Shevchenko", "Pele"])
+            random_name = choice(["Ronaldo", "Shevchenko", "Pele"])
+            record.player_name = self.env.context.get("footballer_name", random_name)
+
+    def read(self, fields=None, load='_classic_read'):
+        """Added default captain name to context dictionary"""
+        self = self.with_context(footballer_name="Zidan")
+        result = super(FootballPlayer, self).read(fields=fields, load=load)
+        return result
 
 
 class ProjectInherited(models.Model):
