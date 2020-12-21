@@ -51,5 +51,30 @@
             <field name="sequence">3</field>
         </record>
 
+        <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">project_football.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Assign timesheet">
+                    <group>
+                        <field name="timesheet_id"/>
+                        <field name="club_id"/>
+                    </group>
+                    <footer>
+                        <button name="assign" type="object"
+                                string="Assign" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_session_wizard"
+                    name="Assign timesheet"
+                    binding_model="account.analytic.line"
+                    res_model="project_football.wizard"
+                    view_mode="form"
+                    target="new"/>
+
     </data>
 </odoo>
