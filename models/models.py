@@ -109,6 +109,9 @@ class FootballClub(models.Model):
             if record.club_name == record.description:
                 raise ValidationError("Fields name and description must be different")
 
+    def reset_players(self):
+        self.players_count = 11
+
 
 class FootballPlayer(models.Model):
     """This model describes football club captain."""
