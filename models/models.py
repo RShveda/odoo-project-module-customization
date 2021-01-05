@@ -88,6 +88,16 @@ class FootballClub(models.Model):
         self.unlink()
         return new_record
 
+    def _cron_remove_parent(self):
+        domain = [('copied_from', '!=', False)]
+        child_records = self.search(args=domain)
+        for child in child_records:
+            parent = self.browse(int(child.copied_from))
+            try:
+                parent.unlink()
+            except Exception as ex:
+                print(ex)
+
     @api.onchange('region')
     def _update_country_selection(self):
         """
