@@ -27,6 +27,7 @@
         'security/football_security.xml',
         'views/views.xml',
         'views/templates.xml',
+        'views/reports.xml',
         'data/football_cleanup_data.xml',
     ],
     # only loaded in demonstration mode

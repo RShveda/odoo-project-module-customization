@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+
+        <!--PDF/HTML report-->
+
+        <template id="club_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>Club info</h2>
+                            <p>Club name: <span t-field="o.club_name"/></p>
+                            <p>Location: <span t-field="o.country"/></p>
+                            <p>Players: <span t-field="o.players_count"/></p>
+                            <p>Captain name: <span t-field="o.player_name"/></p>
+                            <p>Annual budget: <span t-field="o.annual_budget"/></p>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="club_report"
+                model="account.analytic.line"
+                string="Club report"
+                name="project_football.club_report_template"
+                report_type="qweb-html"
+
+        />
+
+        <!--Graph-->
+
+        <record id="act_club_report" model="ir.actions.act_window">
+            <field name="name">Club graph</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="search_view_id" ref="hr_employee_time_clock.hr_timesheet_line_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Record a new activity
+                </p><p>
+                You can register and track your workings hours by project every
+                day. Every time spent on a project will become a cost and can be re-invoiced to
+                customers if required.
+            </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="club_graph_view">
+            <field name="name">account.analytic.line.graph</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <graph string="Players by Club">
+                    <field name="club_name"/>
+                    <field name="players_count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="club_graph" model="ir.actions.act_window.view">
+            <field name="sequence" eval="6"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="project_football.club_graph_view"/>
+            <field name="act_window_id" ref="act_club_report"/>
+        </record>
+
+        <menuitem id="clubs_graph_menu_item"
+                  name="Clubs Graph"
+                  parent="hr_timesheet.menu_hr_time_tracking"
+                  action="project_football.act_club_report"/>
+
+    </data>
+</odoo>
