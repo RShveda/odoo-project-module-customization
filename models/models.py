@@ -42,6 +42,15 @@ class FootballClub(models.Model):
     project_created = fields.Char(compute="_compute_project_date")
     copied_from = fields.Char(string="Copied From", readonly=True)
 
+    def get_projects(self):
+        query = """
+                SELECT name
+                FROM "project_project"
+                """
+        self.env.cr.execute(query)
+        records = self.env.cr.fetchall()
+        return records
+
     @api.depends("project_name_id")
     def _compute_project_date(self):
         """

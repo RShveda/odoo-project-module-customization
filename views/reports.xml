@@ -14,6 +14,12 @@
                             <p>Players: <span t-field="o.players_count"/></p>
                             <p>Captain name: <span t-field="o.player_name"/></p>
                             <p>Annual budget: <span t-field="o.annual_budget"/></p>
+                            <p>Potential projects: </p>
+                            <t t-foreach="o.get_projects()" t-as="project">
+                                <li >
+                                    <t t-esc="project[0]"/>
+                                </li>
+                            </t>
                         </div>
                     </t>
                 </t>
@@ -26,7 +32,6 @@
                 string="Club report"
                 name="project_football.club_report_template"
                 report_type="qweb-html"
-
         />
 
         <!--Graph-->
