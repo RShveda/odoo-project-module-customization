@@ -62,10 +62,29 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="club_pivot_view">
+            <field name="name">account.analytic.line.graph</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Players by Club">
+                    <field name="club_name"/>
+                    <field name="players_count" type="measure"/>
+                    <field name="annual_budget" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
         <record id="club_graph" model="ir.actions.act_window.view">
             <field name="sequence" eval="6"/>
             <field name="view_mode">graph</field>
             <field name="view_id" ref="project_football.club_graph_view"/>
+            <field name="act_window_id" ref="act_club_report"/>
+        </record>
+
+        <record id="club_pivot" model="ir.actions.act_window.view">
+            <field name="sequence" eval="7"/>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="project_football.club_pivot_view"/>
             <field name="act_window_id" ref="act_club_report"/>
         </record>
 
