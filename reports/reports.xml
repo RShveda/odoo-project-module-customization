@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--PDF/HTML report-->
+
+        <template id="club_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>Club info</h2>
+                            <p>Club name: <span t-field="o.club_name"/></p>
+                            <p>Location: <span t-field="o.country"/></p>
+                            <p>Players: <span t-field="o.players_count"/></p>
+                            <p>Captain name: <span t-field="o.player_name"/></p>
+                            <p>Annual budget: <span t-field="o.annual_budget"/></p>
+                            <p>Potential projects: </p>
+                            <t t-foreach="o.get_projects()" t-as="project">
+                                <li>
+                                    <t t-esc="project[0]"/>
+                                </li>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="club_report"
+                model="account.analytic.line"
+                string="Club report"
+                name="project_football.club_report_template"
+                report_type="qweb-html"
+        />
+
+        <!--Graph-->
+
+        <record id="football_search" model="ir.ui.view">
+            <field name="name">club.players.analysis.report.search</field>
+            <field name="model">club.players.analysis.report</field>
+            <field name="arch" type="xml">
+                <search string="Clup Players">
+                    <field name="name"/>
+                    <field name="total_players"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="act_club_report" model="ir.actions.act_window">
+            <field name="name">Club graph</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Record a new activity
+                </p>
+            </field>
+        </record>
+
+        <record id="act_players_analysis_report" model="ir.actions.act_window">
+            <field name="name">Players report graph</field>
+            <field name="res_model">club.players.analysis.report</field>
+            <field name="search_view_id" ref="project_football.football_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Record a new activity
+                </p>
+                <p>something new</p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="club_graph_view">
+            <field name="name">account.analytic.line.graph</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <graph string="Players by Club" type="pie">
+                    <field name="club_name"/>
+                    <field name="players_count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="club_pivot_view">
+            <field name="name">account.analytic.line.graph</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Players by Club">
+                    <field name="club_name"/>
+                    <field name="players_count" type="measure"/>
+                    <field name="annual_budget" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_club_players_analysis_report_tree" model="ir.ui.view">
+            <field name="name">club.players.analysis.report.tree</field>
+            <field name="model">club.players.analysis.report</field>
+            <field name="arch" type="xml">
+                <tree string="Analysis by Club">
+                    <field name="name"/>
+                    <field name="total_players"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_club_players_analysis_report_graph" model="ir.ui.view">
+            <field name="name">club.players.analysis.report.graph</field>
+            <field name="model">club.players.analysis.report</field>
+            <field name="arch" type="xml">
+                <graph string="Analysis by Club" type="pie">
+                    <field name="name"/>
+                    <field name="id" type="measure"/>
+                    <field name="total_players" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="club_graph" model="ir.actions.act_window.view">
+            <field name="sequence" eval="6"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="project_football.club_graph_view"/>
+            <field name="act_window_id" ref="act_club_report"/>
+        </record>
+
+        <record id="club_pivot" model="ir.actions.act_window.view">
+            <field name="sequence" eval="7"/>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="project_football.club_pivot_view"/>
+            <field name="act_window_id" ref="act_club_report"/>
+        </record>
+
+        <record id="action_club_players_analysis_report" model="ir.actions.act_window.view">
+            <field name="sequence" eval="8"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="project_football.view_club_players_analysis_report_graph"/>
+            <field name="act_window_id" ref="act_players_analysis_report"/>
+        </record>
+
+        <menuitem id="clubs_graph_menu_item"
+                  name="Clubs Graph"
+                  parent="hr_timesheet.menu_hr_time_tracking"
+                  action="project_football.act_club_report"/>
+
+        <menuitem id="club_players_count_menu_item"
+                  name="Club Players Analysis"
+                  parent="hr_timesheet.menu_hr_time_tracking"
+                  action="project_football.act_players_analysis_report"/>
+
+    </data>
+</odoo>

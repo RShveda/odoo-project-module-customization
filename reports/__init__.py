@@ -1,0 +1,1 @@
+from . import report_club_players_analysis
